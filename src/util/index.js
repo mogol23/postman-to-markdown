@@ -65,7 +65,7 @@ function readQueryParams(url){
     if(url.query){
         markdown += `### Query Params\n`
         markdown += `\n`
-        markdown += `|Param|value|Desription|\n`
+        markdown += `|Param|value|Description|\n`
         markdown += `|---|---|---|\n`
         url.query.map(query =>{
             markdown += `|${query.key}|${query.value}|${query.description}|\n`
