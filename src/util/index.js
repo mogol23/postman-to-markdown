@@ -10,7 +10,7 @@ function createStructureOfMarkdown(docJson){
     let markdown = ''
 
     markdown += `# Project: ${docJson.info.name}\n`
-    markdown += docJson.info.description !== undefined ? `${docJson.info.description || ''}\n` :``
+    markdown +=  docJson.info.description !== undefined ? `## Description: ${docJson.info.description || ''}\n` :''
     markdown += readItems(docJson.item)
 
     return markdown
@@ -97,10 +97,10 @@ function readFormDataBody(body) {
         if(body.mode === 'formdata'){
             markdown += `### Body ${body.mode}\n`
             markdown += `\n`
-            markdown += `|Param|value|Type|\n`
-            markdown += `|---|---|---|\n`
+            markdown += `|Param|value|Type|Description|\n`
+            markdown += `|---|---|---|---|\n`
             body.formdata.map(form =>{
-                markdown += `|${form.key}|${form.type === 'file' ? form.src : form.value !== undefined ? form.value.replace(/\\n/g,'') : '' }|${form.type}|\n`
+                markdown += `|${form.key}|${form.type === 'file' ? form.src : form.value !== undefined ? form.value.replace(/\\n/g,'') : '' }|${form.type}|${form.description !== undefined ? form.description : "|"}\n`
             })
             markdown += `\n`
             markdown += `\n`
@@ -136,8 +136,8 @@ function readMethods(method){
     
     markdown += `\n`
     markdown += `## End-point: ${method.name}\n`
-    markdown += method.request.description !== undefined ? `${method.request.description || ''}\n` :``
-    markdown += `### Method: ${method.request.method}\n`
+    markdown += `### Description: ${method.request.description || ''}\n`
+    markdown += `Method: ${method.request.method}\n`
     markdown += `>\`\`\`\n`
     markdown += `>${method.request.url.raw}\n`
     markdown += `>\`\`\`\n`
@@ -148,6 +148,7 @@ function readMethods(method){
     markdown += readResponse(method.response)
     markdown += `\n`
     markdown += `⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃\n`
+    markdown += `\n`
     
     return markdown
 }
