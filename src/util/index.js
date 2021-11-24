@@ -47,15 +47,15 @@ function readAuthorization(auth){
 function readRequestOptions(request){
     let markdown = ''
     if(request){
-            request.header.map(header =>{
-            markdown += `### Headers\n`
-            markdown += `\n`
-            markdown += `|Content-Type|Value|\n`
-            markdown += `|---|---|\n`
+        markdown += `### Headers\n`
+        markdown += `\n`
+        markdown += `|Key|Value|\n`
+        markdown += `|---|---|\n`
+        request.header.map(header =>{
             markdown += `|${header.key}|${header.value}|\n`
-            markdown += `\n`
-            markdown += `\n`
         })
+        markdown += `\n`
+        markdown += `\n`
     }
     return markdown
 }
